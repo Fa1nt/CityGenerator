@@ -34,12 +34,12 @@ public class makeCity : MonoBehaviour
     List<Coords> nodes = new List<Coords>();
     List<float> distances = new List<float>();
 
-    void generateSecondaryRoads(GameObject road)
+    void generateSecondaryRoads(GameObject road, string pattern, int iterations)
     {
         string axiom = "F";
         string oldSequence;
         Dictionary<char, string> rules = new Dictionary<char, string>();
-        rules.Add('F', "F[-F][+F]");
+        rules.Add('F', pattern);
         //'+' - 90 kraadi paremale
         //'-' - 90 kraadi vasakule
         //'[' - salvesta asukoht ja nurk
@@ -47,7 +47,7 @@ public class makeCity : MonoBehaviour
         oldSequence = axiom;
         Stack<State> stateStack = new Stack<State>();
 
-        for(int x = 0; x < 3; x++)
+        for(int x = 0; x < iterations; x++)
         {
             string newSequence = "";
             char[] sequence = oldSequence.ToCharArray();
@@ -64,23 +64,29 @@ public class makeCity : MonoBehaviour
                 }
             }
             oldSequence = newSequence;
-            Debug.Log(oldSequence);
+            //Debug.Log(oldSequence);
 
             sequence = oldSequence.ToCharArray();
 
-            for(int i = 0; i < sequence.Length; i++)
+            List<Vector3> locations = new List<Vector3>();
+
+            for (int i = 0; i < sequence.Length; i++)
             {
                 char variable = sequence[i];
 
                 if (variable == 'F')
                 {
                     Vector3 startPos = transform.position;
-                    //startPos.y = 0;
                     Quaternion changeAxis = Quaternion.Euler(0f, 90f, 0f);
-                    GameObject newRoad = Instantiate(road, startPos, transform.rotation * changeAxis);
-                    newRoad.transform.localScale = new Vector3(50, road.transform.localScale.y, road.transform.localScale.z);
                     transform.Translate(Vector3.forward * 50);
-                    Debug.DrawLine(startPos,transform.position, Color.white, 10000f, false);
+                    Vector3 centerPos = new Vector3(startPos.x + transform.position.x, 0, startPos.z + transform.position.z) / 2;
+                    if (!(locations.Contains(centerPos)))
+                    {
+                        locations.Add(centerPos);
+                        GameObject newRoad = Instantiate(road, centerPos, transform.rotation * changeAxis);
+                        newRoad.transform.localScale = new Vector3(50, road.transform.localScale.y, road.transform.localScale.z);
+                    }
+                    //Debug.DrawLine(startPos,transform.position, Color.white, 10000f, false);
                 }
                 else if (variable == '+')
                 {
@@ -151,7 +157,9 @@ public class makeCity : MonoBehaviour
                 newRoad.transform.localScale = new Vector3(distances[i], road.transform.localScale.y, road.transform.localScale.z);
             }
         }
-        generateSecondaryRoads(secRoad);
+        transform.position = new Vector3(mapWidth * gap / (-2), 0, mapHeight * gap / 2);
+        transform.Rotate(0, 180, 0, Space.Self);
+        generateSecondaryRoads(secRoad, "F[-F][+F]", 3);
     }
 
 }
