@@ -34,12 +34,12 @@ public class makeCity : MonoBehaviour
     List<Coords> nodes = new List<Coords>();
     List<float> distances = new List<float>();
 
-    void generateSecondaryRoads(GameObject road, string pattern, int iterations)
+    void generateSecondaryRoads(GameObject road, string pattern, int iterations, int minStreetLength, int maxStreetLength)
     {
-        string axiom = "F";
+        string axiom = "X";
         string oldSequence;
         Dictionary<char, string> rules = new Dictionary<char, string>();
-        rules.Add('F', pattern);
+        rules.Add('X', pattern);
         //'+' - 90 kraadi paremale
         //'-' - 90 kraadi vasakule
         //'[' - salvesta asukoht ja nurk
@@ -76,25 +76,32 @@ public class makeCity : MonoBehaviour
 
                 if (variable == 'F')
                 {
+                    float randLength = Random.Range(minStreetLength, maxStreetLength);
                     Vector3 startPos = transform.position;
                     Quaternion changeAxis = Quaternion.Euler(0f, 90f, 0f);
-                    transform.Translate(Vector3.forward * 50);
+                    transform.Translate(Vector3.forward * randLength);
                     Vector3 centerPos = new Vector3(startPos.x + transform.position.x, 0, startPos.z + transform.position.z) / 2;
-                    if (!(locations.Contains(centerPos)))
-                    {
-                        locations.Add(centerPos);
-                        GameObject newRoad = Instantiate(road, centerPos, transform.rotation * changeAxis);
-                        newRoad.transform.localScale = new Vector3(50, road.transform.localScale.y, road.transform.localScale.z);
-                    }
+                    locations.Add(centerPos);
+                    GameObject newRoad = Instantiate(road, centerPos, transform.rotation * changeAxis);
+                    newRoad.transform.localScale = new Vector3(randLength, road.transform.localScale.y, road.transform.localScale.z);
                     //Debug.DrawLine(startPos,transform.position, Color.white, 10000f, false);
                 }
                 else if (variable == '+')
                 {
-                    transform.Rotate(0, 90, 0, Space.Self);
+                    float randAng = Random.Range(80, 100);
+                    transform.Rotate(0, randAng, 0, Space.Self);
+                    //transform.Rotate(0, 90, 0, Space.Self);
                 }
                 else if (variable == '-')
                 {
-                    transform.Rotate(0, -90, 0, Space.Self);
+                    float randAng = Random.Range(80, 100);
+                    transform.Rotate(0, -randAng, 0, Space.Self);
+                    //transform.Rotate(0, -90, 0, Space.Self);
+                }
+                else if (variable == '.')
+                {
+                    float randAng = Random.Range(-10, 10);
+                    transform.Rotate(0, randAng, 0, Space.Self);
                 }
                 else if (variable == '[')
                 {
@@ -157,9 +164,11 @@ public class makeCity : MonoBehaviour
                 newRoad.transform.localScale = new Vector3(distances[i], road.transform.localScale.y, road.transform.localScale.z);
             }
         }
-        transform.position = new Vector3(mapWidth * gap / (-2), 0, mapHeight * gap / 2);
+        //transform.position = new Vector3(mapWidth * gap / (-2), 0, mapHeight * gap / 2);
+        transform.position = new Vector3(0, 0, mapHeight * gap / 2);
         transform.Rotate(0, 180, 0, Space.Self);
-        generateSecondaryRoads(secRoad, "F[-F][+F]", 3);
+        generateSecondaryRoads(secRoad, "[-FX][+FX].FX", 3, 140, 160);
+        
+        // "[-FX][+FX]FX"
     }
-
 }
