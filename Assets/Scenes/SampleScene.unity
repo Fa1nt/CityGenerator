@@ -430,6 +430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dc215fcd412694da6e2ac97c9eaaf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildings:
+  - {fileID: 2155684353075035340, guid: 814a156ac897ce14498f190cc0a51156, type: 3}
   road: {fileID: 7282951192984439193, guid: aae21d548ef285a468336d28870f7a86, type: 3}
   roadConnector: {fileID: 235548473195561169, guid: fd5846205ff56954182cd3ad7326fe92,
     type: 3}

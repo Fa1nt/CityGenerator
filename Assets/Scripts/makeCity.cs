@@ -24,7 +24,7 @@ public class makeCity : MonoBehaviour
 {
     //public int size = 100;
     //public int population = 100;
-    //public GameObject[] buildings;
+    public GameObject[] buildings;
     public GameObject road;
     public GameObject roadConnector;
     public GameObject secRoad;
@@ -34,7 +34,7 @@ public class makeCity : MonoBehaviour
     List<Coords> nodes = new List<Coords>();
     List<float> distances = new List<float>();
 
-    void generateSecondaryRoads(GameObject road, string pattern, int iterations, int minStreetLength, int maxStreetLength)
+    List<Vector3> generateSecondaryRoads(GameObject road, string pattern, int iterations, int minStreetLength, int maxStreetLength)
     {
         string axiom = "X";
         string oldSequence;
@@ -44,10 +44,12 @@ public class makeCity : MonoBehaviour
         //'-' - 90 kraadi vasakule
         //'[' - salvesta asukoht ja nurk
         //']' - mine tagasi salvestatud kohta
+        //'.' - muudab nurka
         oldSequence = axiom;
         Stack<State> stateStack = new Stack<State>();
+        List<Vector3> stems = new List<Vector3>();
 
-        for(int x = 0; x < iterations; x++)
+        for (int x = 0; x < iterations; x++)
         {
             string newSequence = "";
             char[] sequence = oldSequence.ToCharArray();
@@ -68,8 +70,6 @@ public class makeCity : MonoBehaviour
 
             sequence = oldSequence.ToCharArray();
 
-            List<Vector3> locations = new List<Vector3>();
-
             for (int i = 0; i < sequence.Length; i++)
             {
                 char variable = sequence[i];
@@ -81,22 +81,18 @@ public class makeCity : MonoBehaviour
                     Quaternion changeAxis = Quaternion.Euler(0f, 90f, 0f);
                     transform.Translate(Vector3.forward * randLength);
                     Vector3 centerPos = new Vector3(startPos.x + transform.position.x, 0, startPos.z + transform.position.z) / 2;
-                    locations.Add(centerPos);
                     GameObject newRoad = Instantiate(road, centerPos, transform.rotation * changeAxis);
                     newRoad.transform.localScale = new Vector3(randLength, road.transform.localScale.y, road.transform.localScale.z);
-                    //Debug.DrawLine(startPos,transform.position, Color.white, 10000f, false);
                 }
                 else if (variable == '+')
                 {
                     float randAng = Random.Range(80, 100);
                     transform.Rotate(0, randAng, 0, Space.Self);
-                    //transform.Rotate(0, 90, 0, Space.Self);
                 }
                 else if (variable == '-')
                 {
                     float randAng = Random.Range(80, 100);
                     transform.Rotate(0, -randAng, 0, Space.Self);
-                    //transform.Rotate(0, -90, 0, Space.Self);
                 }
                 else if (variable == '.')
                 {
@@ -112,11 +108,57 @@ public class makeCity : MonoBehaviour
                 }
                 else if (variable == ']')
                 {
+                    stems.Add(transform.position);
                     State last = stateStack.Pop();
                     transform.position = last.pos;
                     transform.rotation = last.angle;
                 }
             }
+        }
+        return stems;
+    }
+
+    void connectStems(List<Vector3> stems, GameObject road, int iterations, int minStreetLength, int maxStreetLength)
+    {
+        for (int j = 0; j < iterations; j++)
+        {
+            List<Vector3> newStems = new List<Vector3>();
+            for (int i = 0; i < stems.Count; i++)
+            {
+                // pikendab tänavat
+                transform.position = stems[i];
+                if (i % 2 == 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 90, 0);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, -90, 0);
+                }
+                float randAng = Random.Range(-10, 10);
+                transform.Rotate(0, randAng, 0, Space.Self);
+                float randLength = Random.Range(minStreetLength, maxStreetLength);
+                Vector3 startPos = transform.position;
+                Quaternion changeAxis = Quaternion.Euler(0f, 90f, 0f);
+                transform.Translate(Vector3.forward * randLength);
+                Vector3 centerPos = new Vector3(startPos.x + transform.position.x, 0, startPos.z + transform.position.z) / 2;
+                GameObject extension = Instantiate(road, centerPos, transform.rotation * changeAxis);
+                extension.transform.localScale = new Vector3(randLength, road.transform.localScale.y, road.transform.localScale.z);
+                newStems.Add(transform.position);
+                // ühendab tänavaid
+                Vector3 posRoad = new Vector3(0, 0, 0);
+                if ((i + 3) <= stems.Count)
+                {
+                    posRoad.x = (stems[i].x + stems[i + 2].x) / 2;
+                    posRoad.z = (stems[i].z + stems[i + 2].z) / 2;
+                    float dist = Mathf.Sqrt(Mathf.Pow((stems[i + 2].x - stems[i].x), 2) + Mathf.Pow((stems[i + 2].z - stems[i].z), 2));
+                    Quaternion faceTarget = Quaternion.LookRotation(stems[i] - stems[i + 2]);
+                    GameObject newRoad = Instantiate(road, posRoad, faceTarget * changeAxis);
+                    newRoad.transform.localScale = new Vector3(dist, road.transform.localScale.y, road.transform.localScale.z);
+                }
+            }
+            stems.Clear();
+            stems = newStems;
         }
     }
 
@@ -164,11 +206,10 @@ public class makeCity : MonoBehaviour
                 newRoad.transform.localScale = new Vector3(distances[i], road.transform.localScale.y, road.transform.localScale.z);
             }
         }
-        //transform.position = new Vector3(mapWidth * gap / (-2), 0, mapHeight * gap / 2);
         transform.position = new Vector3(0, 0, mapHeight * gap / 2);
         transform.Rotate(0, 180, 0, Space.Self);
-        generateSecondaryRoads(secRoad, "[-FX][+FX].FX", 3, 140, 160);
-        
-        // "[-FX][+FX]FX"
+        List<Vector3> stems = generateSecondaryRoads(secRoad, ".F[-F][+F]X", 5, 140, 160);
+        // iga tipu otsast pikendada linna
+        connectStems(stems, secRoad, 7, 140, 160);
     }
 }

@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 681, y: 494}
   m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 52
+  controlID: 116
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 53
+  controlID: 75
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -447,9 +447,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 113.11316, y: -4043.0913, z: 2421.482}
+    m_Target: {x: -148.613, y: -857.0664, z: 359.87683}
     speed: 2
-    m_Value: {x: 113.11316, y: -4043.0913, z: 2421.482}
+    m_Value: {x: -148.613, y: -857.0664, z: 359.87683}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -478,13 +478,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.53428906, y: -0.07134091, z: 0.044985015, w: -0.8412601}
+    m_Target: {x: -0.5562971, y: -0.006891558, z: 0.004003591, w: -0.8311783}
     speed: 2
-    m_Value: {x: -0.535471, y: -0.071262754, z: 0.04508536, w: -0.84033316}
+    m_Value: {x: -0.55618936, y: -0.0068902234, z: 0.0040028156, w: -0.8310173}
   m_Size:
-    m_Target: 8196.251
+    m_Target: 3715.6724
     speed: 2
-    m_Value: 8582.462
+    m_Value: 3715.6724
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -665,19 +665,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Prefabs
   m_LastFoldersGridSize: 64
   m_LastProjectPath: C:\Users\aapva\CityGenerator
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: a42d0000
-    m_LastClickedID: 11684
+    m_SelectedIDs: ce2c0000
+    m_LastClickedID: 11470
     m_ExpandedIDs: 00000000922c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
