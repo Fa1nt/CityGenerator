@@ -145,6 +145,32 @@ public class makeCity : MonoBehaviour
                 GameObject extension = Instantiate(road, centerPos, transform.rotation * changeAxis);
                 extension.transform.localScale = new Vector3(randLength, road.transform.localScale.y, road.transform.localScale.z);
                 newStems.Add(transform.position);
+                if (i == 0)
+                {
+                    // nihutab kõigepealt transformi tagasi
+                    transform.Translate(Vector3.back * randLength);
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    float randAng1 = Random.Range(-10, 10);
+                    transform.Rotate(0, randAng1, 0, Space.Self);
+                    float randLength1 = Random.Range(minStreetLength, maxStreetLength);
+                    transform.Translate(Vector3.forward * randLength1);
+                    Vector3 centerPos1 = new Vector3(startPos.x + transform.position.x, 0, startPos.z + transform.position.z) / 2;
+                    GameObject extension1 = Instantiate(road, centerPos1, transform.rotation * changeAxis);
+                    extension1.transform.localScale = new Vector3(randLength1, road.transform.localScale.y, road.transform.localScale.z);
+                }
+                if (i == 1)
+                {
+                    // nihutab kõigepealt transformi tagasi
+                    transform.Translate(Vector3.back * randLength);
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    float randAng1 = Random.Range(-10, 10);
+                    transform.Rotate(0, randAng1, 0, Space.Self);
+                    float randLength1 = Random.Range(minStreetLength, maxStreetLength);
+                    transform.Translate(Vector3.forward * randLength1);
+                    Vector3 centerPos1 = new Vector3(startPos.x + transform.position.x, 0, startPos.z + transform.position.z) / 2;
+                    GameObject extension1 = Instantiate(road, centerPos1, transform.rotation * changeAxis);
+                    extension1.transform.localScale = new Vector3(randLength1, road.transform.localScale.y, road.transform.localScale.z);
+                }
                 // ühendab tänavaid
                 Vector3 posRoad = new Vector3(0, 0, 0);
                 if ((i + 3) <= stems.Count)
