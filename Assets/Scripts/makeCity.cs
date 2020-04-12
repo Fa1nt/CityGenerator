@@ -233,17 +233,17 @@ public class makeCity : MonoBehaviour
     void Start()
     {
         // loob lõimed juhusliku seediga Perlini müra heledates kohtades
-        float seed = Random.Range(0,100);
-        for(int h = mapHeight/(-2); h < mapHeight/2; h++)
+        float seed = Random.Range(0, 100);
+        for (int h = mapHeight / (-2); h < mapHeight / 2; h++)
         {
-            for(int w = mapWidth/(-2); w < mapWidth/2; w++)
+            for (int w = mapWidth / (-2); w < mapWidth / 2; w++)
             {
-                int n = (int)(Mathf.PerlinNoise(w/2.5f + seed, h/2.5f + seed) * 10);
+                int n = (int)(Mathf.PerlinNoise(w / 2.5f + seed, h / 2.5f + seed) * 10);
                 Vector3 pos = new Vector3(w * gap, 0, h * gap);
 
                 if (n > 7)
                 {
-                    nodes.Add(new Coords(w,h));
+                    nodes.Add(new Coords(w, h));
                     Instantiate(roadConnector, pos, Quaternion.identity);
                 }
             }
@@ -252,11 +252,11 @@ public class makeCity : MonoBehaviour
         for (int i = 0; i < nodes.Count; i++)
         {
             distances.Add(0);
-            Vector3 posRoad = new Vector3(0,0,0);
+            Vector3 posRoad = new Vector3(0, 0, 0);
             Vector3 pos = new Vector3(nodes[i].X * gap, 0, nodes[i].Y * gap);
             for (int j = 0; j < nodes.Count; j++)
             {
-                float dist = Mathf.Sqrt(Mathf.Pow((nodes[j].X * gap - nodes[i].X * gap),2) + Mathf.Pow((nodes[j].Y * gap - nodes[i].Y * gap),2));
+                float dist = Mathf.Sqrt(Mathf.Pow((nodes[j].X * gap - nodes[i].X * gap), 2) + Mathf.Pow((nodes[j].Y * gap - nodes[i].Y * gap), 2));
                 if ((dist < distances[i]) || (distances[i] == 0))
                 {
                     distances[i] = dist;
@@ -274,11 +274,31 @@ public class makeCity : MonoBehaviour
                 newRoad.transform.localScale = new Vector3(distances[i], road.transform.localScale.y, road.transform.localScale.z);
             }
         }
+
+        // secondary roads
         transform.position = new Vector3(0, 0, mapHeight * gap / 2);
         transform.Rotate(0, 180, 0, Space.Self);
         int[] streetAngles = { -10, 0, 10 };
         List<Vector3> stems = generateSecondaryRoads(secRoad, ".F[-F][+F]X", 5, 140, 160, streetAngles, mapWidth * gap, mapHeight * gap);
         // iga tipu otsast pikendab linna
         connectStems(stems, secRoad, 10, 140, 160, streetAngles, mapWidth * gap, mapHeight * gap);
+
+        // hooned
+        GameObject[] createdRoads = GameObject.FindGameObjectsWithTag("Road");
+        for (int i = 0; i < createdRoads.Length; i++)
+        {
+            transform.position = createdRoads[i].transform.position;
+            transform.rotation = createdRoads[i].transform.rotation;
+            transform.Translate(Vector3.forward * 30);
+            Vector3 adjusted = new Vector3(transform.position.x, 50, transform.position.z);
+            Instantiate(buildings[0], adjusted, transform.rotation);
+            transform.position = createdRoads[i].transform.position;
+            transform.Rotate(0, 180, 0, Space.Self);
+            transform.Translate(Vector3.forward * 30);
+            adjusted = new Vector3(transform.position.x, 50, transform.position.z);
+            Instantiate(buildings[0], adjusted, transform.rotation);
+        }
+        // vaja luua hooned mööda tervet teed/tänavat
+        // vaja teha nii, et hooned ei satuks tee peale ega üksteise sisse
     }
 }
