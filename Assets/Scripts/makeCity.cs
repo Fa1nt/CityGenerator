@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +30,7 @@ public class makeCity : MonoBehaviour
     public int mapWidth = 20;
     public int mapHeight = 20;
     int gap = 100;
+    int buildingGap = 10;
     List<Coords> nodes = new List<Coords>();
     List<float> distances = new List<float>();
 
@@ -230,6 +231,71 @@ public class makeCity : MonoBehaviour
         }
     }
 
+    void makeBuildings(GameObject[] roadArray, GameObject[] buildings, int buildingGap, float seedNum, int gap)
+    {
+        for (int i = 0; i < roadArray.Length; i++)
+        {
+            // ühel pool teed
+            // vaja luua hooned mööda tervet teed/tänavat
+            transform.position = roadArray[i].transform.position;
+            transform.rotation = roadArray[i].transform.rotation;
+            transform.Translate(Vector3.forward * 30);
+            float adjustmentY = buildings[0].transform.localPosition.y;
+            Vector3 adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+            // kontrolli vaja, kas satub tee peale
+            if (!Physics.CheckBox(adjusted, buildings[0].transform.localScale / 2f, transform.rotation))
+            {
+                int w = (int)adjusted.x / gap;
+                int h = (int)adjusted.z / gap;
+                if (w < 0)
+                    w = w * (-1);
+                if (h < 0)
+                    h = h * (-1);
+                int n = (int)(Mathf.PerlinNoise(w / 5f + seedNum, h / 5f + seedNum) * 10);
+                if (n < 2)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 4)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 6)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 8)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 10)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                Instantiate(buildings[0], adjusted, transform.rotation);
+            }
+
+            // teisel pool teed
+            // vaja luua hooned mööda tervet teed/tänavat
+            transform.position = roadArray[i].transform.position;
+            transform.Rotate(0, 180, 0, Space.Self);
+            transform.Translate(Vector3.forward * 30);
+            adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+            // kontrolli vaja, kas satub tee peale
+            if (!Physics.CheckBox(adjusted, buildings[0].transform.localScale / 2f, transform.rotation))
+            {
+                int w = (int)adjusted.x / gap;
+                int h = (int)adjusted.z / gap;
+                if (w < 0)
+                    w = w * (-1);
+                if (h < 0)
+                    h = h * (-1);
+                int n = (int)(Mathf.PerlinNoise(w / 5f + seedNum, h / 5f + seedNum) * 10);
+                if (n < 2)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 4)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 6)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 8)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                else if (n < 10)
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                Instantiate(buildings[0], adjusted, transform.rotation);
+            }
+        }
+    }
+
     void Start()
     {
         // loob lõimed juhusliku seediga Perlini müra heledates kohtades
@@ -285,20 +351,6 @@ public class makeCity : MonoBehaviour
 
         // hooned
         GameObject[] createdRoads = GameObject.FindGameObjectsWithTag("Road");
-        for (int i = 0; i < createdRoads.Length; i++)
-        {
-            transform.position = createdRoads[i].transform.position;
-            transform.rotation = createdRoads[i].transform.rotation;
-            transform.Translate(Vector3.forward * 30);
-            Vector3 adjusted = new Vector3(transform.position.x, 50, transform.position.z);
-            Instantiate(buildings[0], adjusted, transform.rotation);
-            transform.position = createdRoads[i].transform.position;
-            transform.Rotate(0, 180, 0, Space.Self);
-            transform.Translate(Vector3.forward * 30);
-            adjusted = new Vector3(transform.position.x, 50, transform.position.z);
-            Instantiate(buildings[0], adjusted, transform.rotation);
-        }
-        // vaja luua hooned mööda tervet teed/tänavat
-        // vaja teha nii, et hooned ei satuks tee peale ega üksteise sisse
+        makeBuildings(createdRoads, buildings, buildingGap, seed, gap);
     }
 }
