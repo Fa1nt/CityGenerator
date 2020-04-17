@@ -246,7 +246,6 @@ public class makeCity : MonoBehaviour
                 // ühel pool teed
                 float adjustmentY = buildings[0].transform.localPosition.y;
                 Vector3 adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                // kontrolli vaja, kas satub tee peale
                 if (!Physics.CheckBox(adjusted, buildings[0].transform.localScale / 2f, transform.rotation))
                 {
                     int w = (int)adjusted.x / gap;
@@ -274,7 +273,6 @@ public class makeCity : MonoBehaviour
 
                 // teisel pool teed
                 adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                // kontrolli vaja, kas satub tee peale
                 if (!Physics.CheckBox(adjusted, buildings[0].transform.localScale / 2f, transform.rotation))
                 {
                     int w = (int)adjusted.x / gap;
@@ -300,6 +298,19 @@ public class makeCity : MonoBehaviour
                 transform.Rotate(0, 180, 0, Space.Self);
                 transform.Translate(Vector3.back * ((roadArray[i].transform.localScale.z + 15) * 2));
                 transform.Translate(Vector3.right * (buildings[0].transform.localScale.x + buildingGap));
+            }
+        }
+        // kontroll et näha, kas satub tee peale
+        for (int i = 0; i < roadArray.Length; i++)
+        {
+            Collider[] colliders = Physics.OverlapBox(roadArray[i].transform.position, roadArray[i].transform.localScale / 2f, roadArray[i].transform.rotation);
+            for (int j = 0; j < colliders.Length; j++)
+            {
+                //Debug.Log(colliders[j].tag);
+                if (colliders[j].tag == "Building")
+                {
+                    Destroy(colliders[j].gameObject);
+                }
             }
         }
     }
