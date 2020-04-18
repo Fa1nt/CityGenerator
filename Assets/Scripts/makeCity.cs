@@ -235,69 +235,122 @@ public class makeCity : MonoBehaviour
     {
         for (int i = 0; i < roadArray.Length; i++)
         {
-            // vaja luua hooned mööda tervet teed/tänavat
-            int iterations = (int)((roadArray[i].transform.localScale.x - buildingGap) / (buildings[0].transform.localScale.x + buildingGap));
+            int type = new int();
+            float length = roadArray[i].transform.localScale.x;
             transform.position = roadArray[i].transform.position;
             transform.rotation = roadArray[i].transform.rotation;
             transform.Translate(Vector3.back * (roadArray[i].transform.localScale.z + 15));
-            transform.Translate(Vector3.left * (roadArray[i].transform.localScale.x / 2 - buildings[0].transform.localScale.x));
-            for (int j = 0; j < iterations; j++)
+            transform.Translate(Vector3.left * (roadArray[i].transform.localScale.x / 2));
+            while (length > 0)
             {
                 // ühel pool teed
-                float adjustmentY = buildings[0].transform.localPosition.y;
-                Vector3 adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                if (!Physics.CheckBox(adjusted, buildings[0].transform.localScale / 2f, transform.rotation))
+                float adjustmentY = new float();
+                Vector3 adjusted = new Vector3();
+                
+                
+                int w = (int)transform.position.x / gap;
+                int h = (int)transform.position.z / gap;
+                if (w < 0)
+                    w = w * (-1);
+                if (h < 0)
+                    h = h * (-1);
+                int n = (int)(Mathf.PerlinNoise(w / 2.5f + seedNum, h / 2.5f + seedNum) * 10);
+                if (n < 2)
                 {
-                    int w = (int)adjusted.x / gap;
-                    int h = (int)adjusted.z / gap;
-                    if (w < 0)
-                        w = w * (-1);
-                    if (h < 0)
-                        h = h * (-1);
-                    int n = (int)(Mathf.PerlinNoise(w / 5f + seedNum, h / 5f + seedNum) * 10);
-                    if (n < 2)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 4)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 6)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 8)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 10)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    Instantiate(buildings[0], adjusted, transform.rotation);
+                    type = 0;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
                 }
+                else if (n < 4)
+                {
+                    type = 1;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                else if (n < 6)
+                {
+                    type = 2;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                else if (n < 8)
+                {
+                    type = 3;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                else if (n < 10)
+                {
+                    type = 4;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
+                    Instantiate(buildings[type], adjusted, transform.rotation);
+
 
                 transform.Rotate(0, 180, 0, Space.Self);
                 transform.Translate(Vector3.back * ((roadArray[i].transform.localScale.z + 15) * 2));
 
                 // teisel pool teed
-                adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                if (!Physics.CheckBox(adjusted, buildings[0].transform.localScale / 2f, transform.rotation))
+                adjusted = new Vector3();
+                
+                
+                w = (int)transform.position.x / gap;
+                h = (int)transform.position.z / gap;
+                if (w < 0)
+                    w = w * (-1);
+                if (h < 0)
+                    h = h * (-1);
+                n = (int)(Mathf.PerlinNoise(w / 2.5f + seedNum, h / 2.5f + seedNum) * 10);
+                if (n < 2)
                 {
-                    int w = (int)adjusted.x / gap;
-                    int h = (int)adjusted.z / gap;
-                    if (w < 0)
-                        w = w * (-1);
-                    if (h < 0)
-                        h = h * (-1);
-                    int n = (int)(Mathf.PerlinNoise(w / 5f + seedNum, h / 5f + seedNum) * 10);
-                    if (n < 2)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 4)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 6)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 8)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    else if (n < 10)
-                        adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                    Instantiate(buildings[0], adjusted, transform.rotation);
+                    type = 0;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
                 }
+                else if (n < 4)
+                {
+                    type = 1;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                else if (n < 6)
+                {
+                    type = 2;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                else if (n < 8)
+                {
+                    type = 3;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                else if (n < 10)
+                {
+                    type = 4;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * buildings[type].transform.localScale.x);
+                }
+                if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
+                    Instantiate(buildings[type], adjusted, transform.rotation);
+
 
                 transform.Rotate(0, 180, 0, Space.Self);
                 transform.Translate(Vector3.back * ((roadArray[i].transform.localScale.z + 15) * 2));
                 transform.Translate(Vector3.right * (buildings[0].transform.localScale.x + buildingGap));
+                length = length - buildings[type].transform.localScale.x - buildingGap;
             }
         }
         // kontroll et näha, kas satub tee peale
@@ -306,7 +359,6 @@ public class makeCity : MonoBehaviour
             Collider[] colliders = Physics.OverlapBox(roadArray[i].transform.position, roadArray[i].transform.localScale / 2f, roadArray[i].transform.rotation);
             for (int j = 0; j < colliders.Length; j++)
             {
-                //Debug.Log(colliders[j].tag);
                 if (colliders[j].tag == "Building")
                 {
                     Destroy(colliders[j].gameObject);

@@ -431,6 +431,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildings:
+  - {fileID: 3965765255440077912, guid: 781e00c1815f88141969f3564d2b7ca8, type: 3}
+  - {fileID: 7608298398688509339, guid: dbd1323ac15c49344b0bdd5505d894f6, type: 3}
+  - {fileID: 3573763920280886463, guid: 6de57e8feff4bdb49a4c937abfed68c0, type: 3}
+  - {fileID: 8133028473965508981, guid: d374a08f84424c14d894a2c3d366f3e5, type: 3}
   - {fileID: 2155684353075035340, guid: 814a156ac897ce14498f190cc0a51156, type: 3}
   road: {fileID: 7282951192984439193, guid: aae21d548ef285a468336d28870f7a86, type: 3}
   roadConnector: {fileID: 235548473195561169, guid: fd5846205ff56954182cd3ad7326fe92,
