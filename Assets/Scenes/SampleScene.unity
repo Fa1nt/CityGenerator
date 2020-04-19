@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildings:
-  - {fileID: 3965765255440077912, guid: 781e00c1815f88141969f3564d2b7ca8, type: 3}
+  - {fileID: 4938222889328636162, guid: bad475ff0dd84cc4c869b244d9d13a33, type: 3}
   - {fileID: 7608298398688509339, guid: dbd1323ac15c49344b0bdd5505d894f6, type: 3}
   - {fileID: 3573763920280886463, guid: 6de57e8feff4bdb49a4c937abfed68c0, type: 3}
   - {fileID: 8133028473965508981, guid: d374a08f84424c14d894a2c3d366f3e5, type: 3}

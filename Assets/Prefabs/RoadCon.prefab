@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9186645049597452511}
   m_Layer: 0
   m_Name: RoadCon
-  m_TagString: Untagged
+  m_TagString: Node
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
