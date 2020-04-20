@@ -30,7 +30,7 @@ public class makeCity : MonoBehaviour
     public int mapWidth = 20;
     public int mapHeight = 20;
     int gap = 100;
-    int buildingGap = 10;
+    int buildingGap = 5;
     List<Coords> nodes = new List<Coords>();
     List<float> distances = new List<float>();
 
@@ -239,7 +239,7 @@ public class makeCity : MonoBehaviour
             float length = roadArray[i].transform.localScale.x - buildingGap;
             transform.position = roadArray[i].transform.position;
             transform.rotation = roadArray[i].transform.rotation;
-            transform.Translate(Vector3.back * (roadArray[i].transform.localScale.z + 15));
+            transform.Translate(Vector3.back * (roadArray[i].transform.localScale.z / 2 + 10));
             transform.Translate(Vector3.left * (roadArray[i].transform.localScale.x / 2 - 15));
             float length2 = length;
             while (length > 0)
@@ -265,49 +265,55 @@ public class makeCity : MonoBehaviour
                 {
                     type = 0;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 5)
-                //if (n < 2.5)
                 {
                     type = 1;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 8)
                 {
                     type = 2;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 8.5)
                 {
                     type = 3;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 13)
-                //else if (n < 5)
                 {
                     type = 4;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 16)
                 {
                     type = 5;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
-                    Instantiate(buildings[type], adjusted, transform.rotation);
+                    if ((length - buildings[type].transform.localScale.x) > 10)
+                        Instantiate(buildings[type], adjusted, transform.rotation);
 
+                transform.Translate(Vector3.forward * (buildings[type].transform.localScale.z / 2f));
                 transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f + buildingGap));
                 length = length - buildings[type].transform.localScale.x - buildingGap;
             }
@@ -315,8 +321,8 @@ public class makeCity : MonoBehaviour
             transform.position = roadArray[i].transform.position;
             transform.rotation = roadArray[i].transform.rotation;
             transform.Rotate(0, 180, 0, Space.Self);
-            transform.Translate(Vector3.back * (roadArray[i].transform.localScale.z + 15));
-            transform.Translate(Vector3.left * (roadArray[i].transform.localScale.x / 2));
+            transform.Translate(Vector3.back * (roadArray[i].transform.localScale.z / 2 + 10));
+            transform.Translate(Vector3.left * (roadArray[i].transform.localScale.x / 2 - 15));
 
             while (length2 > 0)
             {
@@ -341,49 +347,55 @@ public class makeCity : MonoBehaviour
                 {
                     type = 0;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 5)
-                //if (n < 2.5)
                 {
                     type = 1;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 8)
                 {
                     type = 2;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 8.5)
                 {
                     type = 3;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 13)
-                //else if (n < 5)
                 {
                     type = 4;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 else if (n < 16)
                 {
                     type = 5;
                     adjustmentY = buildings[type].transform.localPosition.y;
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
                 if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
-                    Instantiate(buildings[type], adjusted, transform.rotation);
+                    if ((length2 - buildings[type].transform.localScale.x) > 10)
+                        Instantiate(buildings[type], adjusted, transform.rotation);
 
+                transform.Translate(Vector3.forward * (buildings[type].transform.localScale.z / 2f));
                 transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f + buildingGap));
                 length2 = length2 - buildings[type].transform.localScale.x - buildingGap;
             }
