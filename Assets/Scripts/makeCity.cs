@@ -231,7 +231,7 @@ public class makeCity : MonoBehaviour
         }
     }
 
-    void makeBuildings(GameObject[] roadArray, GameObject[] buildings, int buildingGap, float seedNum, int gap)
+    void makeBuildings(GameObject[] roadArray, GameObject[] buildings, int buildingGap, float seedNum, int gap, int limitWidth, int limitHeight)
     {
         for (int i = 0; i < roadArray.Length; i++)
         {
@@ -247,13 +247,20 @@ public class makeCity : MonoBehaviour
                 // ühel pool teed
                 float adjustmentY = new float();
                 Vector3 adjusted = new Vector3();
-                int w = (int)transform.position.x / gap;
-                int h = (int)transform.position.z / gap;
+                int w = (int)transform.position.x / gap * 2;
+                int h = (int)transform.position.z / gap * 2;
                 if (w < 0)
                     w = w * (-1);
                 if (h < 0)
                     h = h * (-1);
-                int n = (int)(Mathf.PerlinNoise(w / 2.5f + seedNum, h / 2.5f + seedNum) * 10);
+                int perlin = (int)(Mathf.PerlinNoise(w / 2.5f + seedNum, h / 2.5f + seedNum) * 10);
+                Vector2 loc = new Vector2();
+                loc.x = transform.position.x;
+                loc.y = transform.position.z;
+                float n = 10 - Vector2.Distance(Vector2.zero, loc) / Mathf.Max(limitHeight / 2 * 100, limitWidth / 2 * 100) * 10;
+                n = n + perlin;
+                //Debug.Log(n);
+
                 if (n < 2)
                 {
                     type = 0;
@@ -261,30 +268,39 @@ public class makeCity : MonoBehaviour
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 4)
+                else if (n < 5)
+                //if (n < 2.5)
                 {
                     type = 1;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 6)
+                else if (n < 8)
                 {
                     type = 2;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 8)
+                else if (n < 8.5)
                 {
                     type = 3;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 10)
+                else if (n < 13)
+                //else if (n < 5)
                 {
                     type = 4;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                }
+                else if (n < 16)
+                {
+                    type = 5;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
@@ -305,17 +321,22 @@ public class makeCity : MonoBehaviour
             while (length2 > 0)
             {
                 // teisel pool teed
-
                 float adjustmentY = new float();
                 Vector3 adjusted = new Vector3();
-
-                int w = (int)transform.position.x / gap;
-                int h = (int)transform.position.z / gap;
+                int w = (int)transform.position.x / gap * 2;
+                int h = (int)transform.position.z / gap * 2;
                 if (w < 0)
                     w = w * (-1);
                 if (h < 0)
                     h = h * (-1);
-                int n = (int)(Mathf.PerlinNoise(w / 2.5f + seedNum, h / 2.5f + seedNum) * 10);
+                int perlin = (int)(Mathf.PerlinNoise(w / 2.5f + seedNum, h / 2.5f + seedNum) * 10);
+                Vector2 loc = new Vector2();
+                loc.x = transform.position.x;
+                loc.y = transform.position.z;
+                float n = 10 - Vector2.Distance(Vector2.zero, loc) / Mathf.Max(limitHeight / 2 * 100, limitWidth / 2 * 100) * 10;
+                n = n + perlin;
+                //Debug.Log(n);
+
                 if (n < 2)
                 {
                     type = 0;
@@ -323,30 +344,39 @@ public class makeCity : MonoBehaviour
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 4)
+                else if (n < 5)
+                //if (n < 2.5)
                 {
                     type = 1;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 6)
+                else if (n < 8)
                 {
                     type = 2;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 8)
+                else if (n < 8.5)
                 {
                     type = 3;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                 }
-                else if (n < 10)
+                else if (n < 13)
+                //else if (n < 5)
                 {
                     type = 4;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                }
+                else if (n < 16)
+                {
+                    type = 5;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
@@ -418,13 +448,14 @@ public class makeCity : MonoBehaviour
                 newRoad.transform.localScale = new Vector3(distances[i], road.transform.localScale.y, road.transform.localScale.z);
             }
         }
-        /*GameObject[] connectors = GameObject.FindGameObjectsWithTag("Node");
-        for (int i = 0; i < connectors.Length; i++)
+        /*GameObject[] createdNodes = GameObject.FindGameObjectsWithTag("Node");
+        for (int i = 0; i < createdNodes.Length; i++)
         {
-            Collider[] colliders = Physics.OverlapSphere(connectors[i].transform.position, connectors[i].transform.localScale.x / 2f);
-            if (colliders.Length == 1)
+            Collider[] colliders = Physics.OverlapBox(createdNodes[i].transform.position, createdNodes[i].transform.localScale / 2f, createdNodes[i].transform.rotation);
+            Debug.Log(createdNodes[i].transform.position.x + " " + createdNodes[i].transform.position.z);
+            for (int j = 0; j < colliders.Length; j++)
             {
-                connectors[i].transform.Translate(Vector3.forward * 100);
+                Debug.Log(colliders[j].gameObject.tag);
             }
         }*/
 
@@ -438,6 +469,6 @@ public class makeCity : MonoBehaviour
 
         // hooned
         GameObject[] createdRoads = GameObject.FindGameObjectsWithTag("Road");
-        makeBuildings(createdRoads, buildings, buildingGap, seed, gap);
+        makeBuildings(createdRoads, buildings, buildingGap, seed, gap, mapWidth, mapHeight);
     }
 }
