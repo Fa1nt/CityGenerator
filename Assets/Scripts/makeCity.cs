@@ -277,15 +277,7 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                else if (n < 8)
-                {
-                    type = 2;
-                    adjustmentY = buildings[type].transform.localPosition.y;
-                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
-                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                }
-                else if (n < 8.5)
+                else if (n < 6)
                 {
                     type = 3;
                     adjustmentY = buildings[type].transform.localPosition.y;
@@ -293,7 +285,7 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                else if (n < 13)
+                else if (n < 8)
                 {
                     type = 4;
                     adjustmentY = buildings[type].transform.localPosition.y;
@@ -301,9 +293,57 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                else if (n < 16)
+                else if (n < 8.3)
                 {
                     type = 5;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 8.5)
+                {
+                    type = 6;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 10)
+                {
+                    type = 7;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 12)
+                {
+                    type = 8;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 13)
+                {
+                    type = 9;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 14)
+                {
+                    type = 10;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 16)
+                {
+                    type = 11;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
@@ -359,15 +399,7 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                else if (n < 8)
-                {
-                    type = 2;
-                    adjustmentY = buildings[type].transform.localPosition.y;
-                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
-                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
-                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
-                }
-                else if (n < 8.5)
+                else if (n < 6)
                 {
                     type = 3;
                     adjustmentY = buildings[type].transform.localPosition.y;
@@ -375,7 +407,7 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                else if (n < 13)
+                else if (n < 8)
                 {
                     type = 4;
                     adjustmentY = buildings[type].transform.localPosition.y;
@@ -383,9 +415,57 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                else if (n < 16)
+                else if (n < 8.3)
                 {
                     type = 5;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 8.5)
+                {
+                    type = 6;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 10)
+                {
+                    type = 7;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 12)
+                {
+                    type = 8;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 13)
+                {
+                    type = 9;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 14)
+                {
+                    type = 10;
+                    adjustmentY = buildings[type].transform.localPosition.y;
+                    transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
+                    transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
+                    adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
+                }
+                else if (n < 16)
+                {
+                    type = 11;
                     adjustmentY = buildings[type].transform.localPosition.y;
                     transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f));
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));

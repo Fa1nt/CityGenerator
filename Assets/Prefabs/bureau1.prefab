@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5473215211399282770}
   - component: {fileID: 405334604635882523}
   - component: {fileID: 704296076478911094}
+  - component: {fileID: -5328575135134192190}
   m_Layer: 0
   m_Name: bureau1
   m_TagString: Building
@@ -58,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26bdcc86a28ff334c93300266cf2aa18, type: 2}
+  - {fileID: 2100000, guid: 37647f8b7c4765844b71e1897b1b5dc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,3 +93,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5328575135134192190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2155684353075035340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf29d2d68294b04e8ce4532891218d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
