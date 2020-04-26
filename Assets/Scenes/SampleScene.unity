@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dc215fcd412694da6e2ac97c9eaaf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  population: 100
   buildings:
   - {fileID: 4938222889328636162, guid: bad475ff0dd84cc4c869b244d9d13a33, type: 3}
   - {fileID: 3573763920280886463, guid: 6de57e8feff4bdb49a4c937abfed68c0, type: 3}

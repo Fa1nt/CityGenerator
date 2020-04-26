@@ -22,7 +22,7 @@ class State
 
 public class makeCity : MonoBehaviour
 {
-    //public int population = 100;
+    public float population = 100;
     public GameObject[] buildings;
     public GameObject road;
     public GameObject roadConnector;
@@ -350,9 +350,10 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
-                    if ((length - buildings[type].transform.localScale.x) > 10)
-                        Instantiate(buildings[type], adjusted, transform.rotation);
+                if (Random.value <= population / 100)
+                    if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
+                        if ((length - buildings[type].transform.localScale.x) > 10)
+                            Instantiate(buildings[type], adjusted, transform.rotation);
 
                 transform.Translate(Vector3.forward * (buildings[type].transform.localScale.z / 2f));
                 transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f + buildingGap));
@@ -472,9 +473,10 @@ public class makeCity : MonoBehaviour
                     transform.Translate(Vector3.back * (buildings[type].transform.localScale.z / 2f));
                     adjusted = new Vector3(transform.position.x, adjustmentY, transform.position.z);
                 }
-                if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
-                    if ((length2 - buildings[type].transform.localScale.x) > 10)
-                        Instantiate(buildings[type], adjusted, transform.rotation);
+                if (Random.value <= population / 100)
+                    if (!Physics.CheckBox(adjusted, buildings[type].transform.localScale / 2f, transform.rotation))
+                        if ((length2 - buildings[type].transform.localScale.x) > 10)
+                            Instantiate(buildings[type], adjusted, transform.rotation);
 
                 transform.Translate(Vector3.forward * (buildings[type].transform.localScale.z / 2f));
                 transform.Translate(Vector3.right * (buildings[type].transform.localScale.x / 2f + buildingGap));
@@ -541,16 +543,6 @@ public class makeCity : MonoBehaviour
                 newRoad.transform.localScale = new Vector3(distances[i], road.transform.localScale.y, road.transform.localScale.z);
             }
         }
-        /*GameObject[] createdNodes = GameObject.FindGameObjectsWithTag("Node");
-        for (int i = 0; i < createdNodes.Length; i++)
-        {
-            Collider[] colliders = Physics.OverlapBox(createdNodes[i].transform.position, createdNodes[i].transform.localScale / 2f, createdNodes[i].transform.rotation);
-            Debug.Log(createdNodes[i].transform.position.x + " " + createdNodes[i].transform.position.z);
-            for (int j = 0; j < colliders.Length; j++)
-            {
-                Debug.Log(colliders[j].gameObject.tag);
-            }
-        }*/
 
         // secondary roads
         transform.position = new Vector3(0, 0, mapHeight * gap / 2);
@@ -569,9 +561,23 @@ public class makeCity : MonoBehaviour
         {
             for (int w = mapWidth / (-2) * 4; w < mapWidth / 2 * 4; w++)
             {
-                Vector3 pos = new Vector3(w * gap / 4 + Random.Range(-10, 10), 0, h * gap / 4 + Random.Range(-10, 10));
-                if (!Physics.CheckBox(pos, trees[0].transform.localScale / 2f, transform.rotation))
-                    Instantiate(trees[0], pos, Quaternion.identity);
+                float n = 10 - Vector2.Distance(Vector2.zero, new Vector2(w * gap / 4, h * gap / 4)) / Mathf.Max(mapHeight / 2 * 100, mapWidth / 2 * 100) * 10;
+                int perlin = (int)(Mathf.PerlinNoise(Mathf.Abs(w * 2) / 2.5f + seed, Mathf.Abs(h * 2) / 2.5f + seed) * 10);
+                if ((n + perlin) < 3)
+                {
+                    Vector3 pos = new Vector3(w * gap / 4 + Random.Range(-10, 11), 0, h * gap / 4 + Random.Range(-10, 11));
+                    if (!Physics.CheckBox(pos, trees[0].transform.localScale / 2f, transform.rotation))
+                        Instantiate(trees[0], pos, Quaternion.identity);
+                }
+                else if ((n + perlin) < 10)
+                {
+                    if (Random.value > 0.7) // 30% võimalus
+                    {
+                        Vector3 pos = new Vector3(w * gap / 4 + Random.Range(-10, 11), 0, h * gap / 4 + Random.Range(-10, 11));
+                        if (!Physics.CheckBox(pos, trees[0].transform.localScale / 2f, transform.rotation))
+                            Instantiate(trees[0], pos, Quaternion.identity);
+                    }
+                }
             }
         }
 
