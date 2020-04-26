@@ -27,6 +27,7 @@ public class makeCity : MonoBehaviour
     public GameObject road;
     public GameObject roadConnector;
     public GameObject secRoad;
+    public GameObject[] trees;
     public int mapWidth = 20;
     public int mapHeight = 20;
     int gap = 100;
@@ -562,5 +563,28 @@ public class makeCity : MonoBehaviour
         // hooned
         GameObject[] createdRoads = GameObject.FindGameObjectsWithTag("Road");
         makeBuildings(createdRoads, buildings, buildingGap, seed, gap, mapWidth, mapHeight);
+
+        // puud
+        for (int h = mapHeight / (-2) * 4; h < mapHeight / 2 * 4; h++)
+        {
+            for (int w = mapWidth / (-2) * 4; w < mapWidth / 2 * 4; w++)
+            {
+                Vector3 pos = new Vector3(w * gap / 4 + Random.Range(-10, 10), 0, h * gap / 4 + Random.Range(-10, 10));
+                if (!Physics.CheckBox(pos, trees[0].transform.localScale / 2f, transform.rotation))
+                    Instantiate(trees[0], pos, Quaternion.identity);
+            }
+        }
+
+        for (int i = 0; i < createdRoads.Length; i++)
+        {
+            Collider[] colliders = Physics.OverlapBox(createdRoads[i].transform.position, createdRoads[i].transform.localScale / 2f, createdRoads[i].transform.rotation);
+            for (int j = 0; j < colliders.Length; j++)
+            {
+                if (colliders[j].tag == "Tree")
+                {
+                    Destroy(colliders[j].gameObject);
+                }
+            }
+        }
     }
 }

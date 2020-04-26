@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Road
   - Building
+  - Node
+  - Tree
   layers:
   - Default
   - TransparentFX

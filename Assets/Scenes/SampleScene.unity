@@ -688,6 +688,8 @@ MonoBehaviour:
   roadConnector: {fileID: 235548473195561169, guid: fd5846205ff56954182cd3ad7326fe92,
     type: 3}
   secRoad: {fileID: 3351489672261322088, guid: 12b6164546f492c42858ebbc36fa57a8, type: 3}
+  trees:
+  - {fileID: 4686232138620708476, guid: af1d2c803d093424999b4368d6290892, type: 3}
   mapWidth: 20
   mapHeight: 20
 --- !u!1 &1183221703
