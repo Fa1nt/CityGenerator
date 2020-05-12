@@ -514,7 +514,7 @@ public class makeCity : MonoBehaviour
         }
     }
 
-    void Start()
+    public void buildCity()
     {
         // loob lõimed juhusliku seediga Perlini müra heledates kohtades
         float seed = Random.Range(0, 100);
@@ -608,5 +608,10 @@ public class makeCity : MonoBehaviour
                 }
             }
         }
+    }
+
+    void Start()
+    {
+        buildCity();
     }
 }

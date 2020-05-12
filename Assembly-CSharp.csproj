@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\ExtendedFlycam.cs" />
     <Compile Include="Assets\Scripts\makeCity.cs" />
     <Compile Include="Assets\Scripts\Restart.cs" />
+    <Compile Include="Assets\Scripts\Settings.cs" />
     <Compile Include="Assets\Scripts\UVMap.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/aapva/CityGenerator/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

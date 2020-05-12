@@ -34,6 +34,8 @@ public class ExtendedFlycam : MonoBehaviour
     void Start()
     {
         Screen.lockCursor = true;
+        Screen.lockCursor = (Screen.lockCursor == false) ? true : false;
+        toggle = toggle ^ true;
     }
 
     void Update()
@@ -65,11 +67,10 @@ public class ExtendedFlycam : MonoBehaviour
             transform.position += transform.right * normalMoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime;
         }
 
-
         if (Input.GetKey(KeyCode.Q)) { transform.position += transform.up * climbSpeed * Time.deltaTime; }
         if (Input.GetKey(KeyCode.E)) { transform.position -= transform.up * climbSpeed * Time.deltaTime; }
 
-        if (Input.GetKeyDown(KeyCode.End))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             Screen.lockCursor = (Screen.lockCursor == false) ? true : false;
             toggle = toggle ^ true;
