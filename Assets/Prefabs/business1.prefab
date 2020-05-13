@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6891338877060885730}
   - component: {fileID: 1575168944330176398}
   - component: {fileID: 7263625983161819039}
+  - component: {fileID: -4041574499121351554}
   m_Layer: 0
   m_Name: business1
   m_TagString: Building
@@ -92,3 +93,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4041574499121351554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133028473965508981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf29d2d68294b04e8ce4532891218d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
