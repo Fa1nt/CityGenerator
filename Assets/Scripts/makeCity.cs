@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 class Coords
 {
@@ -612,6 +613,19 @@ public class makeCity : MonoBehaviour
 
     void Start()
     {
+        //population = ;
+        //mapWidth = ;
+        //mapHeight = ;
+        GameObject inputFieldGo = GameObject.Find("Canvas/InputAreaX");
+        InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
+        //Debug.Log(inputFieldCo.text);
+        mapWidth = int.Parse(inputFieldCo.text);
+        inputFieldGo = GameObject.Find("Canvas/InputAreaY");
+        inputFieldCo = inputFieldGo.GetComponent<InputField>();
+        mapHeight = int.Parse(inputFieldCo.text);
+        inputFieldGo = GameObject.Find("Canvas/InputPopulation");
+        inputFieldCo = inputFieldGo.GetComponent<InputField>();
+        population = float.Parse(inputFieldCo.text);
         buildCity();
     }
 }
