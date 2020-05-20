@@ -613,9 +613,6 @@ public class makeCity : MonoBehaviour
 
     void Start()
     {
-        //population = ;
-        //mapWidth = ;
-        //mapHeight = ;
         GameObject inputFieldGo = GameObject.Find("Canvas/InputAreaX");
         InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
         //Debug.Log(inputFieldCo.text);
