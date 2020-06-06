@@ -517,7 +517,7 @@ public class makeCity : MonoBehaviour
 
     public void buildCity()
     {
-        // loob lõimed juhusliku seediga Perlini müra heledates kohtades
+        // loob sõlmed juhusliku seediga Perlini müra heledates kohtades
         float seed = Random.Range(0, 100);
         for (int h = mapHeight / (-2); h < mapHeight / 2; h++)
         {
